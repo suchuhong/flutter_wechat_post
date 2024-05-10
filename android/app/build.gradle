@@ -1,5 +1,5 @@
 plugins {
-    id "com.android.application"
+    id "com.android.application" 
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -24,7 +24,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.wechat_post"
-    compileSdk flutter.compileSdkVersion
+    // compileSdk flutter.compileSdkVersion
+    compileSdk 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -45,8 +46,10 @@ android {
         applicationId "com.example.wechat_post"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        // minSdkVersion flutter.minSdkVersion
+        // targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21 // 最小 sdk 检查
+        targetSdkVersion 34 // 目标平台 sdk
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
