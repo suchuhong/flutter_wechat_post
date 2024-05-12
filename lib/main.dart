@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_post/features/postedit/screens/post_edit_screen.dart';
+import 'package:wechat_post/providers/drag_photo_provider.dart';
 import 'package:wechat_post/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp((MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => DragPhotoProvider(),
+      ),
+    ],
+    child: const MyApp(),
+  )));
 }
 
 class MyApp extends StatelessWidget {

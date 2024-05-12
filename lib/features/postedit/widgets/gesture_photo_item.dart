@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_post/features/postedit/widgets/normal_photo_item.dart';
 
-class PhotoItem extends StatelessWidget {
+class GesturePhotoItem extends StatelessWidget {
   final AssetEntity asset;
   final double width;
   final VoidCallback onTap;
-  const PhotoItem({
+  const GesturePhotoItem({
     super.key,
     required this.asset,
     required this.width,
@@ -16,18 +17,9 @@ class PhotoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3),
-        ),
-        child: AssetEntityImage(
-          asset,
-          width: width,
-          height: width,
-          fit: BoxFit.cover,
-          isOriginal: false,
-        ),
+      child: NormalPhotoItem(
+        asset: asset,
+        width: width,
       ),
     );
   }

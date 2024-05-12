@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_post/features/postedit/widgets/add_button.dart';
+import 'package:wechat_post/features/postedit/widgets/draggable_photo_item.dart';
 import 'package:wechat_post/features/postedit/widgets/gallery.dart';
-import 'package:wechat_post/features/postedit/widgets/photo_item.dart';
+import 'package:wechat_post/features/postedit/widgets/remove_bar.dart';
+import 'package:wechat_post/models/drag_photo.dart';
+import 'package:wechat_post/providers/drag_photo_provider.dart';
 import 'package:wechat_post/utils/config.dart';
 import 'package:wechat_post/utils/utils.dart';
 
@@ -20,6 +24,13 @@ class _PostEditScrrenState extends State<PostEditScrren> {
   void selectImages() async {
     var res = await pickImages(context);
     setState(() {
+      DragPhoto dragPhoto = DragPhoto(
+        false,
+        false,
+        res,
+      );
+      Provider.of<DragPhotoProvider>(context, listen: false)
+          .updateDragPhoto(dragPhoto); // 更新全局变量的值
       selectedAssets = res;
     });
   }
@@ -42,6 +53,9 @@ class _PostEditScrrenState extends State<PostEditScrren> {
       appBar: AppBar(
         title: const Text("发布"),
       ),
+      bottomSheet: Provider.of<DragPhotoProvider>(context).getIsDragNow()
+          ? const RemoveBat()
+          : null,
       body: Padding(
         padding: const EdgeInsets.all(spacing),
         child: LayoutBuilder(
@@ -53,7 +67,7 @@ class _PostEditScrrenState extends State<PostEditScrren> {
               children: [
                 // 图片
                 for (final asset in selectedAssets)
-                  PhotoItem(
+                  DraggablePhotoItem(
                     onTap: () {
                       gallery(asset);
                     },
