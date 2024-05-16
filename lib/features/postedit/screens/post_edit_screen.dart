@@ -28,6 +28,8 @@ class _PostEditScrrenState extends State<PostEditScrren> {
         false,
         false,
         res,
+        false,
+        "",
       );
       Provider.of<DragPhotoProvider>(context, listen: false)
           .updateDragPhoto(dragPhoto); // 更新全局变量的值
@@ -54,13 +56,14 @@ class _PostEditScrrenState extends State<PostEditScrren> {
         title: const Text("发布"),
       ),
       bottomSheet: Provider.of<DragPhotoProvider>(context).getIsDragNow()
-          ? const RemoveBat()
+          ? const RemoveBar()
           : null,
       body: Padding(
         padding: const EdgeInsets.all(spacing),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            final double width = (constraints.maxWidth - spacing * 2) / 3;
+            final double width =
+                (constraints.maxWidth - spacing * 2 - imagePadding * 2 * 3) / 3;
             return Wrap(
               spacing: spacing,
               runSpacing: spacing,

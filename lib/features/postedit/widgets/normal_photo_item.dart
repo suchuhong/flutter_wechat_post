@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_post/providers/drag_photo_provider.dart';
+import 'package:wechat_post/utils/config.dart';
 
 class NormalPhotoItem extends StatelessWidget {
   final AssetEntity asset;

@@ -7,6 +7,8 @@ class DragPhotoProvider extends ChangeNotifier {
     false,
     false,
     [],
+    false,
+    "",
   );
 
   void updateDragPhoto(DragPhoto dragPhoto) {
@@ -24,6 +26,16 @@ class DragPhotoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateIsWillOrder(bool isWillOrder) {
+    _dragPhoto.isWillOrder = isWillOrder;
+    notifyListeners();
+  }
+
+  void updateTargetAssetId(String targetAssetId) {
+    _dragPhoto.targetAssetId = targetAssetId;
+    notifyListeners();
+  }
+
   bool getIsWillRemove() {
     return _dragPhoto.isWillRemove;
   }
@@ -32,8 +44,26 @@ class DragPhotoProvider extends ChangeNotifier {
     return _dragPhoto.isDragNow;
   }
 
+  bool getIsWillOrder() {
+    return _dragPhoto.isWillOrder;
+  }
+
+  String getTargetAssetId() {
+    return _dragPhoto.targetAssetId;
+  }
+
   void removeSelectedAsset(AssetEntity assetEntity) {
     _dragPhoto.selectedAssets.remove(assetEntity);
+    notifyListeners();
+  }
+
+  void removeSelectedAssetById(int id) {
+    _dragPhoto.selectedAssets.removeAt(id);
+    notifyListeners();
+  }
+
+  void insertBeforeSelectedAsset(int id, AssetEntity assetEntity) {
+    _dragPhoto.selectedAssets.insert(id, assetEntity);
     notifyListeners();
   }
 

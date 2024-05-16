@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_post/providers/drag_photo_provider.dart';
 
-class RemoveBat extends StatefulWidget {
-  const RemoveBat({super.key});
+class RemoveBar extends StatefulWidget {
+  const RemoveBar({super.key});
 
   @override
-  State<RemoveBat> createState() => _RemoveBatState();
+  State<RemoveBar> createState() => _RemoveBarState();
 }
 
-class _RemoveBatState extends State<RemoveBat> {
+class _RemoveBarState extends State<RemoveBar> {
   @override
   void initState() {
     super.initState();
@@ -59,7 +59,6 @@ class _RemoveBatState extends State<RemoveBat> {
       // 调用以确定此小部件是否有兴趣接收给定的 被拖动到这个拖动目标上的数据片段。
       onWillAcceptWithDetails: (data) {
         setState(() {
-          // isWillRemove = true;
           Provider.of<DragPhotoProvider>(context, listen: false)
               .updateIsWillRemove(true); // 更新全局变量的值
         });
@@ -70,10 +69,8 @@ class _RemoveBatState extends State<RemoveBat> {
       // onWillAcceptWithDetails 返回 true 调用这里
       onAcceptWithDetails: (data) {
         setState(() {
-          // isWillRemove = false;
           Provider.of<DragPhotoProvider>(context, listen: false)
               .updateIsWillRemove(false);
-          // selectedAssets.remove(data.data);
           Provider.of<DragPhotoProvider>(context, listen: false)
               .removeSelectedAsset(data.data);
         });
@@ -82,7 +79,6 @@ class _RemoveBatState extends State<RemoveBat> {
       // 当被拖动到该目标上的给定数据离开时调用 目标。
       onLeave: (data) {
         setState(() {
-          // isWillRemove = false;
           Provider.of<DragPhotoProvider>(context, listen: false)
               .updateIsWillRemove(false);
         });
